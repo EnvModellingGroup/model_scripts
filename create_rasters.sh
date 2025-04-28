@@ -1,14 +1,13 @@
 #!/bin/bash
 # pull directory as argument
 directory=$1
-ncore=$2
-mesh=$3
+mesh=$2
 velocity=true
 bss=true 
 
-resolution=8000
+resolution=1000
 projection=EPSG:32630
-maskfile="../../TM1mSLR/mesh/mask.shp"
+maskfile="../../mesh/mask.shp"
 
 function process_file {
 
@@ -23,7 +22,7 @@ function process_file {
         # loop over variables with counter
         echo "   Rasterising ${var}"
         # create the raster ov the vtu
-        mpiexec -n ${ncore} python h5_2_raster.py --resolution ${resolution} ${file} ${mesh} temp --func ${var}
+        python h5_2_raster.py --resolution ${resolution} --mesh ${mesh} --func ${var} ${file} temp
         # create a filename
         filename="${directory}/${var}".nc
         #mask it
