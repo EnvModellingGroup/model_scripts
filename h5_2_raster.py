@@ -156,6 +156,9 @@ def main():
         for x in x_coords:
             raster_coords.append([x,y])
 
+    with CheckpointFile(input_file, "r") as f:
+        mesh2d = f.load_mesh()
+
     # create our function, note this is assumed to be DG
     if (velocity):
         P1_2d = VectorFunctionSpace(mesh2d, 'DG', 1)
