@@ -228,7 +228,7 @@ def main():
 
                 # in thetis, "land" is -ve bathy
                 # elev - bathy therefore give +ve number where topo is greater than water
-                dry = np.array(elev_data) - np.array(bathy_data)
+                dry = np.array(elev_data, dtype=float) - np.array(bathy_data, dtype=float)
                 u_data_set[dry >= 0] = -9999
                 v_data_set[dry >= 0] = -9999
 
